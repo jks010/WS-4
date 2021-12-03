@@ -2,9 +2,14 @@ package com.WS3.controller
 
 import com.WS3.model.Cars
 import com.WS3.service.CarService
+import com.opencsv.CSVReader
+import com.opencsv.CSVReaderBuilder
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.access.prepost.PreAuthorize
 import org.springframework.web.bind.annotation.*
+import org.springframework.web.multipart.MultipartFile
+import java.io.BufferedReader
+import java.io.InputStreamReader
 
 @RestController
 class CarController {
@@ -60,18 +65,24 @@ class CarController {
     fun deleteCar(@PathVariable(value = "id") id: Int): List<Cars?>? {
         return carService?.delete(id)
     }
-    /*
+
     @PostMapping("/file")
     @PreAuthorize("hasAuthority('PRIVILEGE_ADMIN_READ')")
     //@Throws(IOException::class, CsvException::class)
     fun file(@RequestParam("file") file: MultipartFile) {
         val fileReader = file.inputStream
         val fileReaderr = BufferedReader(InputStreamReader(fileReader, "UTF-8"))
-        CSVReader(fileReaderr).use { reader ->
-            val r: List<Array<String>> = reader.readAll()
-            for (strings in r) {
-                if (strings[0] == "id" == false) {
-                    val car = Cars()
+        val csvReader = CSVReaderBuilder(fileReaderr)
+            .build()
+
+        val header = csvReader.readNext()
+
+        var strings: Array<String>? = csvReader.readNext()
+        while (strings != null) {
+            // Do something with the data
+
+            if (strings[0] == "id" == false) {
+                    /*val car = Cars()
                     car.setId(Integer.valueOf(strings[0]))
                     car.setFactoryId(Integer.valueOf(strings[1]))
                     car.setModel(strings[2])
@@ -79,12 +90,13 @@ class CarController {
                     car.setFuel(strings[5])
                     car.setDoors(Integer.valueOf(strings[6]))
                     car.setCost(java.lang.Double.valueOf(strings[7]))
-                    car.setColor(strings[8])
-                    carService.Add(car)
+                    car.setColor(strings[8])*/
+                carService?.Add(((Cars(Integer.valueOf(strings[0]),Integer.valueOf(strings[1]),strings[2],Integer.valueOf(strings[4]),
+                    strings[5],Integer.valueOf(strings[6]),java.lang.Double.valueOf(strings[7]),strings[8]))))
                 }
             }
-        }
+
         return
     }
-    */
+
 }
