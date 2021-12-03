@@ -1,0 +1,7 @@
+id,factory_id,model,model_name,year,fuel,doors,cost,color
+1,1,toyota,corolla xei,2016,flex,4,91.000,branca
+2,1,toyota,etios sedan,2013,flex,4,33.000,azul
+3,2,ford,maverick gt v8,1974,alcool,2,120.000,azul
+4,2,ford,ranger 4x4,2008,diesel,4,40.000,preta
+5,3,volkswagen,passat,2009,gasolina,4,28.000,bordo
+6,4,fiat,uno smart,1995,gasolina,2,3.500,vermelha
